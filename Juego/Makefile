@@ -5,8 +5,11 @@ all:flappyCliente flappy server
 server:SocketDatagrama.o PaqueteDatagrama.o
 	g++ serverFlappy.cpp SocketDatagrama.o PaqueteDatagrama.o -o server
 
-flappyCliente:SocketDatagrama.o PaqueteDatagrama.o
-	g++ flappyCliente.cpp SocketDatagrama.o PaqueteDatagrama.o $(SDLFLAGS) -o flappyCliente
+flappyCliente: Game.o
+	g++ flappyCliente2.cpp Game.o $(SDLFLAGS) -o flappyCliente
+
+Game.o: Game.cpp Game.h SocketDatagrama.o PaqueteDatagrama.o
+	g++ Game.cpp SocketDatagrama.o PaqueteDatagrama.o -c
 
 #flappyServidor:SocketDatagrama.o PaqueteDatagrama.o
 #	g++ flappyServidor.cpp SocketDatagrama.o PaqueteDatagrama.o $(SDLFLAGS) -o flappyServidor
